@@ -1,0 +1,35 @@
+To start training: 
+
+python flow --model cfg/yolov2-tiny-voc-2c.cfg --load bin/yolov2-tiny-voc.weights --train --annotation new_model_data/annotations --dataset new_model_data/images --gpu 0.75 --epoch 30 
+
+To continue from a checkpoint : 
+
+python flow --model cfg/yolov2-tiny-voc-2c.cfg --load -1 --train --annotation new_model_data/annotations --dataset new_model_data/images --gpu 0.75 --epoch 3000 
+
+To test :
+
+python flow --imgdir sample_img --model cfg/yolov2-tiny-voc-2c.cfg --load 5390 --json
+
+
+python flow --imgdir sample_img --model cfg/yolov2-tiny-voc-2c.cfg --load 5390 --json
+
+--------Error Report-----------------
+
+I have followed your instruction, and it is very clear and I rarely stuck anywhere. Except on this training part. I stuck when I test, there is no bounding box, and no results.
+
+I have train my model with only 2 classes. I also edited the number of classes in CFG. I also changed the filter to 35 since (5x(5+2 classes)) on the last convolutional laye, in CFG file.
+
+I also change the labels.txt into my own labels(Real, Fake)
+
+I only have 94 datasets (images, .png), and I set the epoch to 1700. The moving average lost came down from 109 to 0.007 (after 4 or 5 hours of training). But when I tried to do some test, JSON output becomes NULL. Or [ ]
+
+ I also tried on the webcam, instead of showing FPS, I make it print out the results.
+
+When I use the pretrained model, I got a result of :
+[{'label': 'truck', 'confidence': 0.62592417, 'topleft': {'x': 80, 'y': 32}, 'bottomright': {'x': 998, 'y': 400}}]
+
+But when I use my model, it became :
+[ ]
+
+I also test it on my training and testing images, but still no result.
+Did I do something wrong somewhere?
